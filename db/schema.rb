@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_25_090657) do
+ActiveRecord::Schema.define(version: 2021_05_25_090802) do
 
   create_table "blog_posts", force: :cascade do |t|
     t.text "title", null: false
@@ -29,10 +29,12 @@ ActiveRecord::Schema.define(version: 2021_05_25_090657) do
     t.text "error"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
     t.index ["email_name"], name: "index_sent_emails_on_email_name"
     t.index ["entity_id"], name: "index_sent_emails_on_entity_id"
     t.index ["entity_type", "entity_id"], name: "index_sent_emails_on_entity"
     t.index ["message_id"], name: "index_sent_emails_on_message_id"
+    t.index ["user_id"], name: "index_sent_emails_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -43,4 +45,5 @@ ActiveRecord::Schema.define(version: 2021_05_25_090657) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "sent_emails", "users"
 end
