@@ -25,6 +25,7 @@ class ApplicationMailer < ActionMailer::Base
 
   # email_name - some name we can later use for statistics
   # entity - any ActiveRecord model we want to associate the email with
+  # user - user this email is sent to
   def store_message(email_name:, entity:, user: nil)
     self.metadata['email_name'] = email_name.to_s.truncate(80)
     self.metadata['entity_id'] = entity.id
