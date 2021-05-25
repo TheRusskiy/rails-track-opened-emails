@@ -1,6 +1,10 @@
 class PostmarkMailObserver
   def self.delivered_email(m)
+    # only create a record if API has accepted the message
     return unless m.delivered?
+
+    # as a part of API we are going to assume that
+    # an email should be saved if "email_name" is set
     return unless m.metadata['email_name'].present?
 
     SentEmail.create(
