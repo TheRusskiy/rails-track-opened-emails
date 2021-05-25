@@ -6,7 +6,8 @@ class PostmarkController < ActionController::Base
   def email_opened
     EmailOpenedService.call(
       message_id: params[:MessageID],
-      first_open: params[:FirstOpen]
+      first_open: params[:FirstOpen],
+      opened_at: params[:ReceivedAt]
     )
     render json: { status: 201 }
   end
