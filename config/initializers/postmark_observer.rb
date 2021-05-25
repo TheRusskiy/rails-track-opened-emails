@@ -13,6 +13,7 @@ class PostmarkMailObserver
       message_id: m.message_id,
       entity_id: m.metadata['entity_id'],
       entity_type: m.metadata['entity_type'],
+      user_id: m.metadata['user_id'],
       subject: m.subject
     )
   end

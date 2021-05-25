@@ -6,7 +6,11 @@ class ApplicationMailer < ActionMailer::Base
     # by calling "store_message" we are saying that this
     # emails need to be saved in our database
     # for further tracking
-    store_message(email_name: 'new_blog_post', entity: blog_post)
+    store_message(
+      email_name: 'new_blog_post',
+      entity: blog_post,
+      user: subscriber
+    )
 
     mail(
       to: subscriber.email,
@@ -21,9 +25,10 @@ class ApplicationMailer < ActionMailer::Base
 
   # email_name - some name we can later use for statistics
   # entity - any ActiveRecord model we want to associate the email with
-  def store_message(email_name:, entity:)
+  def store_message(email_name:, entity:, user: nil)
     self.metadata['email_name'] = email_name.to_s.truncate(80)
     self.metadata['entity_id'] = entity.id
     self.metadata['entity_type'] = entity.class.name
+    self.metadata['user_id'] = user.id if user
   end
 end
