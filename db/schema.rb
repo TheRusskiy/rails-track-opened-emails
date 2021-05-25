@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_25_072849) do
+ActiveRecord::Schema.define(version: 2021_05_25_090657) do
 
   create_table "blog_posts", force: :cascade do |t|
     t.text "title", null: false
@@ -33,6 +33,14 @@ ActiveRecord::Schema.define(version: 2021_05_25_072849) do
     t.index ["entity_id"], name: "index_sent_emails_on_entity_id"
     t.index ["entity_type", "entity_id"], name: "index_sent_emails_on_entity"
     t.index ["message_id"], name: "index_sent_emails_on_message_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.text "email", null: false
+    t.text "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
 end
