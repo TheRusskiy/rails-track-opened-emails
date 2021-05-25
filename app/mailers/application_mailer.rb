@@ -11,6 +11,8 @@ class ApplicationMailer < ActionMailer::Base
     mail(
       to: subscriber.email,
       subject: "New Post: #{blog_post.title}",
+      # this param is required if you want Postmark to add a tracking pixel
+      # and send you status updates
       track_opens: 'true'
     )
   end
